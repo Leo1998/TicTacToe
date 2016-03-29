@@ -1,5 +1,6 @@
 package controller;
 
+import model.Encryptor;
 import model.List;
 import model.Player;
 import model.User;
@@ -56,8 +57,9 @@ public class Controller {
                 BufferedReader reader = new BufferedReader(new FileReader(file));
                 String line = null;
                 while ((line = reader.readLine()) != null) {
+                    line = Encryptor.decrypt(line);
                     String[] split = line.split(",");
-
+                    
                     if (split.length == 4) {
                         String username = split[0];
                         String password = split[1];
@@ -93,7 +95,7 @@ public class Controller {
 
             database.toFirst();
             while(database.hasAccess()) {
-                writer.write(database.getContent().save() + "\n");
+                writer.write(Encryptor.encrypt(database.getContent().save()) + "\n");
 
                 database.next();
             }
