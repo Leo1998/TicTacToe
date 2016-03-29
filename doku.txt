@@ -1,0 +1,4 @@
+16.3 gameview, strings sortieren, menuview
+17.3 win erkennung verbessert
+18.3 resize, registrierung
+29.3 
