@@ -1,7 +1,9 @@
 package controller;
 
 import model.Field;
+import model.List;
 import model.Player;
+import model.User;
 
 import javax.swing.*;
 
@@ -29,7 +31,29 @@ public class Game {
             Player winner = field.getWinner();
             if (winner != null) {
                 JOptionPane.showMessageDialog(null, "The Winner is: " + winner.getName());
+
+                List<User> database = ctrl.getDatabase();
+
+                database.toFirst();
+                while (database.hasAccess()){
+                     if (winner.getName().equals(database.getContent().getUsername())) {
+                         database.getContent().setWins(database.getContent().getWins() + 1);
+                     }
+                    database.next();
+                }
+
+                database.toFirst();
+                while (database.hasAccess()){
+                    Player loser = p1 == winner ? p2 : p1;
+
+                    if (loser.getName().equals(database.getContent().getUsername())) {
+                        database.getContent().setLosses(database.getContent().getLosses() + 1);
+                    }
+                    database.next();
+                }
+
                 ctrl.enterMenu();
+
             } else if (field.isFull()) {
                 JOptionPane.showMessageDialog(null, "It's a draw!");
                 ctrl.enterMenu();
