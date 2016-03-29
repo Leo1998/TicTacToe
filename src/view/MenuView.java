@@ -137,6 +137,19 @@ public class MenuView {
                 }
             }
         });
+
+        multiplayerCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!multiplayerCheckBox.isSelected()){
+                    logName2.setEnabled(false);
+                    logPass2.setEnabled(false);
+                }else{
+                    logName2.setEnabled(true);
+                    logPass2.setEnabled(true);
+                }
+            }
+        });
     }
 
     {
