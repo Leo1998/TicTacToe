@@ -5,12 +5,14 @@ import controller.Game;
 import model.Field;
 import model.Player;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 
 public class GameView extends JPanel implements MouseListener, ComponentListener {
 
@@ -20,6 +22,7 @@ public class GameView extends JPanel implements MouseListener, ComponentListener
     private int fieldW;
     private int fieldH;
 
+    private BufferedImage background;
 
     public GameView(Game game) {
         this.game = game;
@@ -30,6 +33,17 @@ public class GameView extends JPanel implements MouseListener, ComponentListener
         this.setBackground(Color.BLACK);
 
         this.onResize(this.getWidth(), this.getHeight());
+
+        this.background = loadImage("/res/background.png");
+    }
+
+    private static BufferedImage loadImage(String path) {
+        try {
+            return ImageIO.read(GameView.class.getResourceAsStream(path));
+        } catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private void onResize(int w, int h) {
@@ -47,6 +61,8 @@ public class GameView extends JPanel implements MouseListener, ComponentListener
         super.paint(g);
 
         Graphics2D g2d = (Graphics2D) g;
+
+        g2d.drawImage(background, 0, 0, getWidth(), getHeight(), null);
 
         Field field = game.getField();
         if (field != null) {
