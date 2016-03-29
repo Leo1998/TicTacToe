@@ -21,7 +21,7 @@ public class User {
     }
 
     public String save() {
-        return username + "," + password;
+        return username + "," + password + "," + wins + "," + losses;
     }
 
     public int getWins() {

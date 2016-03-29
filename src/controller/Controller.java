@@ -58,11 +58,18 @@ public class Controller {
                 while ((line = reader.readLine()) != null) {
                     String[] split = line.split(",");
 
-                    if (split.length == 2) {
+                    if (split.length == 4) {
                         String username = split[0];
                         String password = split[1];
+                        String winsString = split[2];
+                        String lossesString = split[3];
+                        int wins = Integer.valueOf(winsString);
+                        int losses = Integer.valueOf(lossesString);
 
                         User user = new User(username, password);
+                        user.setWins(wins);
+                        user.setLosses(losses);
+
                         database.append(user);
                     }
                 }
