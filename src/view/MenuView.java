@@ -34,8 +34,8 @@ public class MenuView {
 
                 if (multiplayerCheckBox.isSelected()) {
                     if (!logName.getText().isEmpty() || !logName2.getText().isEmpty()) {
-                        if (new String(logPass.getPassword()).isEmpty() || new String(logPass.getPassword()).isEmpty()){
-                            JOptionPane.showMessageDialog(null ,"Bitte Password eingeben!");                                                 //Passwort muss eingegeben sein!
+                        if (new String(logPass.getPassword()).isEmpty() || new String(logPass.getPassword()).isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "Bitte Password eingeben!");                                                 //Passwort muss eingegeben sein!
                         } else {
                             List<User> database = ctrl.getDatabase();
 
@@ -62,21 +62,21 @@ public class MenuView {
                                 database.next();
                             }
 
-                            if (p1 == null || p2 == null){
+                            if (p1 == null || p2 == null) {
                                 JOptionPane.showMessageDialog(null, "Fehler beim Einloggen! Bitte überprüfe deine Eingabe!");
-                            }else{
+                            } else {
                                 ctrl.startGame(p1, p2);
                             }
 
                         }
-                    }else{
+                    } else {
                         JOptionPane.showMessageDialog(null, "Bitte Username eingeben!");                                                    //Usernames auch!
                     }
                 } else {
                     if (!logName.getText().isEmpty()) {
-                        if (new String(logPass.getPassword()).isEmpty()){
+                        if (new String(logPass.getPassword()).isEmpty()) {
                             JOptionPane.showMessageDialog(null, "Bitte Passwort eingeben!");
-                        }else{
+                        } else {
                             List<User> database = ctrl.getDatabase();
 
                             database.toFirst();
@@ -97,7 +97,7 @@ public class MenuView {
                                 }
                             }
                         }
-                    }else{
+                    } else {
                         JOptionPane.showMessageDialog(null, "Bitte Username eingeben!");
                     }
                 }
@@ -112,8 +112,8 @@ public class MenuView {
                     List<User> database = ctrl.getDatabase();
 
                     database.toFirst();
-                    while(database.hasAccess()){
-                        if (database.getContent().getUsername().equals(regName.getText())){
+                    while (database.hasAccess()) {
+                        if (database.getContent().getUsername().equals(regName.getText())) {
                             JOptionPane.showMessageDialog(null, "Der Username existiert bereits, bitte nutze einen anderen Username!");
                             return;
                         }

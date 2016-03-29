@@ -23,7 +23,7 @@ public class User {
     public String save() {
         return username + "," + password;
     }
-    
+
     public int getWins() {
         return wins;
     }
