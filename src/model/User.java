@@ -16,4 +16,8 @@ public class User {
     public String getPassword() {
         return password;
     }
+
+    public String save() {
+        return username + "," + password;
+    }
 }

@@ -13,7 +13,6 @@ public class View {
     private Controller ctrl;
     private State state;
 
-
     private JFrame frame;
 
     public View(Controller ctrl){

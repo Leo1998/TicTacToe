@@ -32,9 +32,9 @@ public class MenuView {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if(multiplayerCheckBox.isSelected()){
+                if (multiplayerCheckBox.isSelected()) {
                     if (!logName.getText().isEmpty() || !logName2.getText().isEmpty()) {
-                        if (new String(logPass.getPassword()).isEmpty() || new String(logPass.getPassword()).isEmpty()){
+                        if (new String(logPass.getPassword()).isEmpty() || new String(logPass.getPassword()).isEmpty()) {
                             System.out.println("Bitte Password eingeben!");                                                 //Passwort muss eingegeben sein!
                         } else {
                             List<User> database = ctrl.getDatabase();
@@ -42,9 +42,9 @@ public class MenuView {
                             Player p1 = null;
 
                             database.toFirst();
-                            while (database.hasAccess()){
-                                if (database.getContent().getUsername().equals(logName.getText())){
-                                    if (database.getContent().getPassword().equals(new String(logPass.getPassword()))){
+                            while (database.hasAccess()) {
+                                if (database.getContent().getUsername().equals(logName.getText())) {
+                                    if (database.getContent().getPassword().equals(new String(logPass.getPassword()))) {
                                         p1 = new Player(logName.getText(), true, ctrl);
                                     }
                                 }
@@ -53,36 +53,36 @@ public class MenuView {
                             Player p2 = null;
 
                             database.toFirst();
-                            while (database.hasAccess()){
-                                if (database.getContent().getUsername().equals(logName2.getText())){
-                                    if (database.getContent().getPassword().equals(new String(logPass2.getPassword()))){
+                            while (database.hasAccess()) {
+                                if (database.getContent().getUsername().equals(logName2.getText())) {
+                                    if (database.getContent().getPassword().equals(new String(logPass2.getPassword()))) {
                                         p2 = new Player(logName2.getText(), true, ctrl);
                                     }
                                 }
                                 database.next();
                             }
 
-                            if (p1 == null || p2 == null){
+                            if (p1 == null || p2 == null) {
                                 System.out.println("Fehler beim Einloggen! Bitte überprüfe deine Eingabe!");
-                            }else{
+                            } else {
                                 ctrl.startGame(p1, p2);
                             }
 
                         }
-                    }else{
+                    } else {
                         System.out.println("Bitte Usernames eingeben!");                                                    //Usernames auch!
                     }
-                }else{
+                } else {
                     if (!logName.getText().isEmpty()) {
-                        if (new String(logPass.getPassword()).isEmpty()){
+                        if (new String(logPass.getPassword()).isEmpty()) {
                             System.out.println("Bitte Passwort eingeben");
-                        }else{
+                        } else {
                             List<User> database = ctrl.getDatabase();
 
                             database.toFirst();
-                            while (database.hasAccess()){
-                                if (database.getContent().getUsername().equals(logName.getText())){
-                                    if (database.getContent().getPassword().equals(new String(logPass.getPassword()))){
+                            while (database.hasAccess()) {
+                                if (database.getContent().getUsername().equals(logName.getText())) {
+                                    if (database.getContent().getPassword().equals(new String(logPass.getPassword()))) {
                                         Player p1 = new Player(logName.getText(), true, ctrl);
 
                                         /**
@@ -97,7 +97,7 @@ public class MenuView {
                                 }
                             }
                         }
-                    }else{
+                    } else {
                         System.out.println("Bitte Username eingeben!");
                     }
                 }
@@ -198,6 +198,7 @@ public class MenuView {
         logPass2 = new JPasswordField();
         panel3.add(logPass2, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         multiplayerCheckBox = new JCheckBox();
+        multiplayerCheckBox.setSelected(true);
         multiplayerCheckBox.setText("Multiplayer");
         panel.add(multiplayerCheckBox, new com.intellij.uiDesigner.core.GridConstraints(5, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }

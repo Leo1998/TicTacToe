@@ -1,14 +1,16 @@
 package controller;
 
-import model.Field;
 import model.List;
 import model.Player;
 import model.User;
 import view.View;
 
+import java.io.*;
+
 public class Controller {
 
     public static final String ADMIN_PASSWORD = "Geburtenrate";
+    public static final String DATABASE_PATH = "database.dat";
 
     public static void main(String[] args) {
         new Controller();
@@ -26,7 +28,13 @@ public class Controller {
 
         view.setState(View.State.Menu);
 
-        database = new List<User>();
+        readDatabase();
+
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            public void run() {
+                saveDatabase();
+            }
+        }));
 
         while(running) {
             view.repaint();
@@ -35,6 +43,58 @@ public class Controller {
                 Thread.sleep(16);
             } catch(Exception e) {
             }
+        }
+    }
+
+    public void readDatabase() {
+        this.database = new List<User>();
+
+        try {
+            File file = new File(DATABASE_PATH);
+
+            if (file.exists()) {
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    String[] split = line.split(",");
+
+                    if (split.length == 2) {
+                        String username = split[0];
+                        String password = split[1];
+                        System.out.println(username + "  " + password);
+
+                        User user = new User(username, password);
+                        database.append(user);
+                    }
+                }
+
+                reader.close();
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveDatabase() {
+        System.out.println("Saving Database to " + DATABASE_PATH);
+        try {
+            File file = new File(DATABASE_PATH);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+
+            database.toFirst();
+            while(database.hasAccess()) {
+                writer.write(database.getContent().save() + "\n");
+
+                database.next();
+            }
+
+            writer.close();
+        } catch(IOException e) {
+            e.printStackTrace();
         }
     }
 
