@@ -35,7 +35,7 @@ public class MenuView {
                 if(multiplayerCheckBox.isSelected()){
                     if (!logName.getText().isEmpty() || !logName2.getText().isEmpty()) {
                         if (new String(logPass.getPassword()).isEmpty() || new String(logPass.getPassword()).isEmpty()){
-                            System.out.println("Bitte Password eingeben!");                                                 //Passwort muss eingegeben sein!
+                            JOptionPane.showMessageDialog(null ,"Bitte Password eingeben!");                                                 //Passwort muss eingegeben sein!
                         } else {
                             List<User> database = ctrl.getDatabase();
 
@@ -63,19 +63,19 @@ public class MenuView {
                             }
 
                             if (p1 == null || p2 == null){
-                                System.out.println("Fehler beim Einloggen! Bitte überprüfe deine Eingabe!");
+                                JOptionPane.showMessageDialog(null, "Fehler beim Einloggen! Bitte überprüfe deine Eingabe!");
                             }else{
                                 ctrl.startGame(p1, p2);
                             }
 
                         }
                     }else{
-                        System.out.println("Bitte Usernames eingeben!");                                                    //Usernames auch!
+                        JOptionPane.showMessageDialog(null, "Bitte Username eingeben!");                                                    //Usernames auch!
                     }
                 }else{
                     if (!logName.getText().isEmpty()) {
                         if (new String(logPass.getPassword()).isEmpty()){
-                            System.out.println("Bitte Passwort eingeben");
+                            JOptionPane.showMessageDialog(null, "Bitte Passwort eingeben!");
                         }else{
                             List<User> database = ctrl.getDatabase();
 
@@ -98,7 +98,7 @@ public class MenuView {
                             }
                         }
                     }else{
-                        System.out.println("Bitte Username eingeben!");
+                        JOptionPane.showMessageDialog(null, "Bitte Username eingeben!");
                     }
                 }
             }
@@ -108,22 +108,32 @@ public class MenuView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!regName.getText().isEmpty()) {
+
+                    List<User> database = ctrl.getDatabase();
+
+                    database.toFirst();
+                    while(database.hasAccess()){
+                        if (database.getContent().getUsername().equals(regName.getText())){
+                            JOptionPane.showMessageDialog(null, "Der Username existiert bereits, bitte nutze einen anderen Username!");
+                            return;
+                        }
+                        database.next();
+                    }
                     if (new String(regPass.getPassword()).isEmpty()) {
-                        System.out.println("Gebe bitte ein Passwort ein!");
+                        JOptionPane.showMessageDialog(null, "Gebe bitte ein Passwort ein!");
                     } else {
                         if (new String(adminPass.getPassword()).equals(Controller.ADMIN_PASSWORD)) {
                             ctrl.addUser(regName.getText(), new String(regPass.getPassword()));
-                            System.out.println("Erfolgreiche Registirerung mit dem Username: " + regName.getText());
+                            JOptionPane.showMessageDialog(null, "Erfolgreiche Registrierung mit dem Username: " + regName.getText());
                             regName.setText(null);
                             regPass.setText(null);
                             adminPass.setText(null);
-
                         } else {
-                            System.out.println("Falsches Adminpasswort!");
+                            JOptionPane.showMessageDialog(null, "Falsches Adminpasswort!");
                         }
                     }
                 } else {
-                    System.out.println("Bitte Trage einen Namen ein!");
+                    JOptionPane.showMessageDialog(null, "Bitte Trage einen Namen ein!");
                 }
             }
         });
