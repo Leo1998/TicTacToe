@@ -66,6 +66,9 @@ public class GameView extends JPanel implements MouseListener, ComponentListener
 
         g2d.drawImage(background, 0, 0, getWidth(), getHeight(), null);
 
+        g2d.setColor(Color.white);
+        g2d.drawString("Aktueller Spieler: " + game.getCurrentPlayer().getName(), 10, 25);
+
         Field field = game.getField();
         if (field != null) {
             drawField(g2d, field, fieldX, fieldY, fieldW, fieldH);
