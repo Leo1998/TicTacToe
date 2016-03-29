@@ -44,9 +44,13 @@ public class Controller {
     }
 
     public void startGame(Player p1, Player p2) {
-        this.game = new Game(p1, p2);
+        this.game = new Game(p1, p2, this);
 
         this.view.setState(View.State.Game);
+    }
+
+    public void enterMenu() {
+        this.view.setState(View.State.Menu);
     }
 
     public Game getGame() {

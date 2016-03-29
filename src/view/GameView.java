@@ -22,7 +22,20 @@ public class GameView extends JPanel implements MouseListener, ComponentListener
     private int fieldW;
     private int fieldH;
 
-    private BufferedImage background;
+    private static BufferedImage background;
+
+    static {
+        background = loadImage("/res/background.png");
+    }
+
+    private static BufferedImage loadImage(String path) {
+        try {
+            return ImageIO.read(GameView.class.getResourceAsStream(path));
+        } catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public GameView(Game game) {
         this.game = game;
@@ -33,17 +46,6 @@ public class GameView extends JPanel implements MouseListener, ComponentListener
         this.setBackground(Color.BLACK);
 
         this.onResize(this.getWidth(), this.getHeight());
-
-        this.background = loadImage("/res/background.png");
-    }
-
-    private static BufferedImage loadImage(String path) {
-        try {
-            return ImageIO.read(GameView.class.getResourceAsStream(path));
-        } catch(Exception e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     private void onResize(int w, int h) {
