@@ -21,7 +21,7 @@ public class Game {
         this.p2 = p2;
         this.field = new Field(p1, p2);
 
-        this.currentPlayer = p1;
+        this.currentPlayer = Math.random() > 0.5 ? p1 : p2;
     }
 
     public void nextMove(int xMove, int yMove) {

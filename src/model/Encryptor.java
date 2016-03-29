@@ -2,31 +2,32 @@ package model;
 
 public class Encryptor {
 
-    private static final char[] password;
-    static {
-        password = new String("STERBERATE").toCharArray();
-    }
-
     public static String encrypt(String s) {
-        char[] chars = s.toCharArray();
-        char[] encrypted = new char[chars.length];
+        String result = "";
+        int l = s.length();
+        char c;
 
-        for (int i = 0; i < chars.length; i++) {
-            encrypted[i] = (char) (chars[i] + 10);
+        for (int i = 0; i < l; i++) {
+            c = s.charAt(i);
+            c += 10;
+            result += c;
         }
 
-        return new String(encrypted);
+        return s;
     }
 
     public static String decrypt(String s) {
-        char[] encrypted = s.toCharArray();
-        char[] chars = new char[encrypted.length];
+        String result = "";
+        int l = s.length();
+        char c;
 
-        for (int i = 0; i < encrypted.length; i++) {
-            chars[i] = (char) (encrypted[i] - 10);
+        for (int i = 0; i < l; i++) {
+            c = s.charAt(i);
+            c -= 10;
+            result += c;
         }
 
-        return new String(chars);
+        return s;
     }
 
 }

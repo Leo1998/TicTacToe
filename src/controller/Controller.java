@@ -59,12 +59,16 @@ public class Controller {
                 while ((line = reader.readLine()) != null) {
                     line = Encryptor.decrypt(line);
                     String[] split = line.split(",");
-                    
-                    if (split.length == 4) {
-                        String username = split[0];
-                        String password = split[1];
-                        String winsString = split[2];
-                        String lossesString = split[3];
+
+                    for (int i = 0; i < split.length; i++) {
+                        System.out.println(split[i]);
+                    }
+
+                    for (int i = 0; i < split.length; i += 4) {
+                        String username = split[i+0];
+                        String password = split[i+1];
+                        String winsString = split[i+2];
+                        String lossesString = split[i+3];
                         int wins = Integer.valueOf(winsString);
                         int losses = Integer.valueOf(lossesString);
 
@@ -95,7 +99,7 @@ public class Controller {
 
             database.toFirst();
             while(database.hasAccess()) {
-                writer.write(Encryptor.encrypt(database.getContent().save()) + "\n");
+                writer.write(Encryptor.encrypt(database.getContent().save() + ","));
 
                 database.next();
             }
