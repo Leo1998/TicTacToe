@@ -27,7 +27,7 @@ public class GameView extends JPanel implements MouseListener, ComponentListener
         this.addMouseListener(this);
         this.addComponentListener(this);
 
-        this.setBackground(Color.GREEN);
+        this.setBackground(Color.BLACK);
 
         this.onResize(this.getWidth(), this.getHeight());
     }
