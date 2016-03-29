@@ -113,7 +113,10 @@ public class MenuView {
                     } else {
                         if (new String(adminPass.getPassword()).equals(Controller.ADMIN_PASSWORD)) {
                             ctrl.addUser(regName.getText(), new String(regPass.getPassword()));
-                            System.out.println("Erfolgreiche Registirerung mit dem Username:" + regName.getText());
+                            System.out.println("Erfolgreiche Registirerung mit dem Username: " + regName.getText());
+                            regName.setText(null);
+                            regPass.setText(null);
+                            adminPass.setText(null);
 
                         } else {
                             System.out.println("Falsches Adminpasswort!");
