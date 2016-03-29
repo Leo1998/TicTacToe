@@ -25,9 +25,7 @@ public class MenuView {
     private JCheckBox multiplayerCheckBox;
 
     public MenuView(final Controller ctrl) {
-
         this.ctrl = ctrl;
-
 
         logButton.addActionListener(new ActionListener() {
             @Override
