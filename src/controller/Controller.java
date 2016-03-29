@@ -59,7 +59,7 @@ public class Controller {
                 while ((line = reader.readLine()) != null) {
                     line = Encryptor.decrypt(line);
                     String[] split = line.split(",");
-                    
+
                     if (split.length == 4) {
                         String username = split[0];
                         String password = split[1];
