@@ -61,7 +61,6 @@ public class Controller {
                     if (split.length == 2) {
                         String username = split[0];
                         String password = split[1];
-                        System.out.println(username + "  " + password);
 
                         User user = new User(username, password);
                         database.append(user);
