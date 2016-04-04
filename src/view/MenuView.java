@@ -79,22 +79,26 @@ public class MenuView {
                         } else {
                             List<User> database = ctrl.getDatabase();
 
+                            Player p1 = null;
+
                             database.toFirst();
                             while (database.hasAccess()) {
                                 if (database.getContent().getUsername().equals(logName.getText())) {
                                     if (database.getContent().getPassword().equals(new String(logPass.getPassword()))) {
-                                        Player p1 = new Player(logName.getText(), true, ctrl);
-
-                                        /**
-                                         *
-                                         * Hier muss KI undso hin!
-                                         *
-                                         * Wichtig!!
-                                         *
-                                         */
+                                        p1 = new Player(logName.getText(), true, ctrl);
 
                                     }
                                 }
+
+                                database.next();
+                            }
+
+                            Player p2 = new Player("KI Player", false, ctrl);
+
+                            if (p1 == null || p2 == null) {
+                                JOptionPane.showMessageDialog(null, "Fehler beim Einloggen! Bitte überprüfe deine Eingabe!");
+                            } else {
+                                ctrl.startGame(p1, p2);
                             }
                         }
                     } else {

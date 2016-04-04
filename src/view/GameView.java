@@ -2,6 +2,7 @@ package view;
 
 import controller.Controller;
 import controller.Game;
+import controller.Textures;
 import model.Field;
 import model.Player;
 
@@ -21,21 +22,6 @@ public class GameView extends JPanel implements MouseListener, ComponentListener
     private int fieldY;
     private int fieldW;
     private int fieldH;
-
-    private static BufferedImage background;
-
-    static {
-        background = loadImage("/res/background.png");
-    }
-
-    private static BufferedImage loadImage(String path) {
-        try {
-            return ImageIO.read(GameView.class.getResourceAsStream(path));
-        } catch(Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     public GameView(Game game) {
         this.game = game;
@@ -64,7 +50,7 @@ public class GameView extends JPanel implements MouseListener, ComponentListener
 
         Graphics2D g2d = (Graphics2D) g;
 
-        g2d.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+        g2d.drawImage(Textures.background, 0, 0, getWidth(), getHeight(), null);
 
         g2d.setColor(Color.white);
         g2d.drawString("Aktueller Spieler: " + game.getCurrentPlayer().getName(), 10, 25);

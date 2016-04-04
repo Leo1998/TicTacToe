@@ -6,6 +6,7 @@ import model.Player;
 import model.User;
 import view.View;
 
+import javax.swing.*;
 import java.io.*;
 
 public class Controller {
@@ -25,6 +26,12 @@ public class Controller {
     private boolean running = true;
 
     public Controller() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch(Exception e) {}
+
+        Textures.load();
+
         this.view = new View(this);
 
         view.setState(View.State.Menu);
@@ -113,6 +120,10 @@ public class Controller {
 
     public void startGame(Player p1, Player p2) {
         this.game = new Game(p1, p2, this);
+
+        if (!game.getCurrentPlayer().isLocalPlayer()) {
+            game.nextMove(-1, -1);
+        }
 
         this.view.setState(View.State.Game);
     }

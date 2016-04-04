@@ -13,6 +13,18 @@ public class Field {
         this.cells = new Player[3][3];
     }
 
+    public Field copy() {
+        Field field = new Field(p1, p2);
+
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                field.setCell(x, y, this.getCell(x, y));
+            }
+        }
+
+        return field;
+    }
+
     public Player getCell(int x, int y){
         return cells[x][y];
     }
@@ -100,4 +112,5 @@ public class Field {
 
         return match ? c1 : null;
     }
+
 }

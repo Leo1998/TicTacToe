@@ -7,7 +7,7 @@ import javax.swing.*;
 public class View {
 
     public enum State {
-        Menu, Game;
+        Menu, Game
     }
 
     private Controller ctrl;

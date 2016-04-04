@@ -1,9 +1,6 @@
 package controller;
 
-import model.Field;
-import model.List;
-import model.Player;
-import model.User;
+import model.*;
 
 import javax.swing.*;
 
@@ -25,7 +22,6 @@ public class Game {
     }
 
     public void nextMove(int xMove, int yMove) {
-        if (!field.isOccupied(xMove, yMove)) {
             currentPlayer.move(field, xMove, yMove);
 
             Player winner = field.getWinner();
@@ -53,18 +49,30 @@ public class Game {
                 }
 
                 ctrl.enterMenu();
-
             } else if (field.isFull()) {
                 JOptionPane.showMessageDialog(null, "It's a draw!");
                 ctrl.enterMenu();
-            }
-
-            if (currentPlayer == p1) {
-                currentPlayer = p2;
             } else {
-                currentPlayer = p1;
+
+                if (currentPlayer == p1) {
+                    currentPlayer = p2;
+                } else {
+                    currentPlayer = p1;
+                }
+
+                if (!currentPlayer.isLocalPlayer()) {
+                    nextMove(-1, -1);
+                }
             }
-        }
+    }
+
+    public KITree calcKITree() {
+        Player otherPlayer = currentPlayer == p1 ? p2 : p1;
+
+        KITree kiTree = new KITree(field);
+        kiTree.calculate(currentPlayer, otherPlayer);
+
+        return kiTree;
     }
 
     public Player getP1() {

@@ -17,9 +17,20 @@ public class Player {
 
     public void move(Field field, int xMove, int yMove) {
         if (localPlayer) {
-            field.setCell(xMove, yMove, this);
+            if (!field.isOccupied(xMove, yMove)) {
+                field.setCell(xMove, yMove, this);
+            }
         } else {
+            KITree kiTree = ctrl.getGame().calcKITree();
 
+            KITree.Move optimalMove = kiTree.findBestMove(this);
+            if (optimalMove == null) {
+                optimalMove = kiTree.randomMove();
+            }
+
+            if (!field.isOccupied(optimalMove.getX(), optimalMove.getY())) {
+                field.setCell(optimalMove.getX(), optimalMove.getY(), this);
+            }
         }
     }
 
@@ -29,10 +40,6 @@ public class Player {
 
     public boolean isLocalPlayer() {
         return localPlayer;
-    }
-
-    public Controller getCtrl() {
-        return ctrl;
     }
 
 }
