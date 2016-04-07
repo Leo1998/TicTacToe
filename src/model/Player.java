@@ -25,6 +25,7 @@ public class Player {
 
             KITree.Move optimalMove = kiTree.findBestMove(this);
             if (optimalMove == null) {
+                System.out.println("random!");
                 optimalMove = kiTree.randomMove();
             }
 

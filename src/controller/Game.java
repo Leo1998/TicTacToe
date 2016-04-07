@@ -22,6 +22,7 @@ public class Game {
     }
 
     public void nextMove(int xMove, int yMove) {
+        if ((xMove == -1 && yMove == -1) || !field.isOccupied(xMove, yMove)) {
             currentPlayer.move(field, xMove, yMove);
 
             Player winner = field.getWinner();
@@ -31,15 +32,15 @@ public class Game {
                 List<User> database = ctrl.getDatabase();
 
                 database.toFirst();
-                while (database.hasAccess()){
-                     if (winner.getName().equals(database.getContent().getUsername())) {
-                         database.getContent().setWins(database.getContent().getWins() + 1);
-                     }
+                while (database.hasAccess()) {
+                    if (winner.getName().equals(database.getContent().getUsername())) {
+                        database.getContent().setWins(database.getContent().getWins() + 1);
+                    }
                     database.next();
                 }
 
                 database.toFirst();
-                while (database.hasAccess()){
+                while (database.hasAccess()) {
                     Player loser = p1 == winner ? p2 : p1;
 
                     if (loser.getName().equals(database.getContent().getUsername())) {
@@ -64,6 +65,7 @@ public class Game {
                     nextMove(-1, -1);
                 }
             }
+        }
     }
 
     public KITree calcKITree() {
