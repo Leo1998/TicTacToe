@@ -1,6 +1,10 @@
 package model;
 
+import java.util.Random;
+
 public class KITree {
+
+    private static final Random random = new Random();
 
     public class Move {
 
@@ -64,40 +68,68 @@ public class KITree {
     }
 
     public Move findBestMove(Player currentPlayer) {
-        Move bestMove = null;
+        List<Move> bestMoves = new List<Move>();
+        int bestMovesCount = 0;
+
         int moveCount = -1;
 
-        possibilities.toFirst();
-        moves.toFirst();
-        while(possibilities.hasAccess() && moves.hasAccess()) {
-            KITree tree = possibilities.getContent();
-            Move move = moves.getContent();
+        this.possibilities.toFirst();
+        this.moves.toFirst();
+        while(this.possibilities.hasAccess() && this.moves.hasAccess()) {
+            KITree tree = this.possibilities.getContent();
+            Move move = this.moves.getContent();
 
-            if (tree.getField().getWinner() == currentPlayer) {
-                moveCount = 1;
-                bestMove = move;
-                break;
-            } else {
-                int winMoves = tree.deternamineWinMoves(currentPlayer);
-                System.out.println("winMoves: " + winMoves);
+            boolean opponentWin = false;
+            Player opponent = currentPlayer == field.getP1() ? field.getP2() : field.getP1();
+            tree.possibilities.toFirst();
+            opponentWhileLoop : while(tree.possibilities.hasAccess()) {
+                KITree childTree = tree.possibilities.getContent();
 
-                if (moveCount == -1 || winMoves < moveCount) {
+                if (childTree.getField().getWinner() == opponent) {
+                    opponentWin = true;
+                    break opponentWhileLoop;
+                }
+
+                tree.possibilities.next();
+            }
+
+            int winMoves = tree.deternamineWinMoves(currentPlayer);
+            if (moveCount == -1 || winMoves <= moveCount) {
+                if (!opponentWin || winMoves == 1) {
+                    if (moveCount == -1 || winMoves < moveCount) {
+                        bestMoves = new List<Move>();
+                        bestMovesCount = 0;
+                    }
+
                     moveCount = winMoves;
-                    bestMove = move;
+
+                    bestMoves.append(move);
+                    bestMovesCount++;
                 }
             }
 
-            possibilities.next();
-            moves.next();
+            this.possibilities.next();
+            this.moves.next();
         }
 
-        System.out.println();
+        System.out.println(bestMovesCount);
 
-        return bestMove;
+        int r = random.nextInt(bestMovesCount);
+        int i = 0;
+        bestMoves.toFirst();
+        while(bestMoves.hasAccess()) {
+            if (r == i) {
+                return bestMoves.getContent();
+            }
+
+            bestMoves.next();
+            i++;
+        }
+        return null;
     }
 
     private int deternamineWinMoves(Player currentPlayer) {
-        return deternamineWinMoves( currentPlayer, 1);
+        return deternamineWinMoves(currentPlayer, 1);
     }
 
     private int deternamineWinMoves(Player currentPlayer, int moves) {
@@ -121,34 +153,6 @@ public class KITree {
             return bestMoves;
         }
     }
-
-    /**
-    private int deternamineWinMoves(KITree root, Player currentPlayer) {
-        KITree tree = root;
-        int moves = 1;
-
-        while(tree != null) {
-            if (tree.getField().getWinner() == currentPlayer) {
-                break;
-            }
-
-            tree.possibilities.toFirst();
-            while(tree.possibilities.hasAccess()) {
-                KITree nextTree = tree.possibilities.getContent();
-
-                if (nextTree.getField().getWinner() == currentPlayer) {
-                    break;
-                }
-
-                tree.possibilities.next();
-            }
-
-            moves++;
-        }
-
-        return moves;
-    }
-     **/
 
     public Move randomMove() {
         moves.toFirst();
