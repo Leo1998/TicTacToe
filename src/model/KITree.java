@@ -100,7 +100,6 @@ public class KITree {
                         bestMoves = new List<Move>();
                         bestMovesCount = 0;
                     }
-
                     moveCount = winMoves;
 
                     bestMoves.append(move);
@@ -112,18 +111,20 @@ public class KITree {
             this.moves.next();
         }
 
-        System.out.println(bestMovesCount);
+        if (bestMovesCount > 0) {
+            int r = random.nextInt(bestMovesCount);
+            System.out.println(bestMovesCount + "   " + r);
 
-        int r = random.nextInt(bestMovesCount);
-        int i = 0;
-        bestMoves.toFirst();
-        while(bestMoves.hasAccess()) {
-            if (r == i) {
-                return bestMoves.getContent();
+            int i = 0;
+            bestMoves.toFirst();
+            while (bestMoves.hasAccess()) {
+                if (r == i) {
+                    return bestMoves.getContent();
+                }
+
+                bestMoves.next();
+                i++;
             }
-
-            bestMoves.next();
-            i++;
         }
         return null;
     }
