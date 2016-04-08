@@ -37,6 +37,7 @@ public class Controller {
         view.setState(View.State.Menu);
 
         readDatabase();
+        view.getMenuView().refreshUserList();
 
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
@@ -116,6 +117,7 @@ public class Controller {
     public void addUser(String username, String password){
         User user = new User(username, password);
         database.append(user);
+        view.getMenuView().refreshUserList();
     }
 
     public void startGame(Player p1, Player p2) {

@@ -6,5 +6,4 @@
 	Background
 4.4 KI angefangen
 6.4 KI fast fertig
-	
-	
+8.4 KI Fertig, rematch, user liste

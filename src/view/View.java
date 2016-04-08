@@ -15,8 +15,12 @@ public class View {
 
     private JFrame frame;
 
+    private MenuView menuView;
+
     public View(Controller ctrl){
         this.ctrl = ctrl;
+
+        this.menuView = new MenuView(ctrl);
 
         frame = new JFrame("TicTacToe");
         frame.setSize(640, 640);
@@ -28,6 +32,10 @@ public class View {
 
     public void repaint() {
         frame.getContentPane().repaint();
+    }
+
+    public MenuView getMenuView() {
+        return menuView;
     }
 
     public State getState() {
@@ -45,8 +53,9 @@ public class View {
                 if (state == State.Game) {
                     pane = new GameView(ctrl.getGame());
                 } else if (state == State.Menu) {
-                    pane = (JPanel) new MenuView(ctrl).$$$getRootComponent$$$();
+                    pane = (JPanel) menuView.$$$getRootComponent$$$();
                 }
+
                 frame.getContentPane().removeAll();
                 frame.getContentPane().add(pane);
                 frame.revalidate();
