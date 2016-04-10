@@ -49,10 +49,25 @@ public class Game {
                     database.next();
                 }
 
-                ctrl.enterMenu();
+                int reply = JOptionPane.showConfirmDialog(null, "Rematch?",null, JOptionPane.YES_NO_OPTION);
+                if (reply == JOptionPane.YES_OPTION){
+                    this.field = new Field(p1, p2);
+
+                    this.currentPlayer = Math.random() > 0.5 ? p1 : p2;
+                }else {
+                    ctrl.enterMenu();
+                }
             } else if (field.isFull()) {
                 JOptionPane.showMessageDialog(null, "It's a draw!");
-                ctrl.enterMenu();
+
+                int reply = JOptionPane.showConfirmDialog(null, "Rematch?",null, JOptionPane.YES_NO_OPTION);
+                if (reply == JOptionPane.YES_OPTION){
+                    this.field = new Field(p1, p2);
+
+                    this.currentPlayer = Math.random() > 0.5 ? p1 : p2;
+                }else {
+                    ctrl.enterMenu();
+                }
             } else {
 
                 if (currentPlayer == p1) {

@@ -9,7 +9,7 @@ public class Encryptor {
 
         for (int i = 0; i < l; i++) {
             c = s.charAt(i);
-            c += 10;
+            c += 5;
             result += c;
         }
 
@@ -23,7 +23,7 @@ public class Encryptor {
 
         for (int i = 0; i < l; i++) {
             c = s.charAt(i);
-            c -= 10;
+            c -= 5;
             result += c;
         }
 
