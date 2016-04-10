@@ -113,7 +113,6 @@ public class KITree {
 
         if (bestMovesCount > 0) {
             int r = random.nextInt(bestMovesCount);
-            System.out.println(bestMovesCount + "   " + r);
 
             int i = 0;
             bestMoves.toFirst();
