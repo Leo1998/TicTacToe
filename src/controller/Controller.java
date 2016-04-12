@@ -52,7 +52,6 @@ public class Controller {
         view.setState(View.State.Menu);
 
         readDatabase();
-        view.getMenuView().refreshUserList();
 
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
@@ -130,6 +129,9 @@ public class Controller {
             }
 
             writer.close();
+
+
+
         } catch(IOException e) {
             e.printStackTrace();
         }
@@ -144,7 +146,7 @@ public class Controller {
     public void addUser(String username, String password){
         User user = new User(username, password);
         database.append(user);
-        view.getMenuView().refreshUserList();
+        bubbleSort();
     }
 
     /**
@@ -163,11 +165,47 @@ public class Controller {
         this.view.setState(View.State.Game);
     }
 
+    public void bubbleSort(){
+
+        int x = 0;
+
+        database.toFirst();
+        while (database.hasAccess()){
+            x++;
+            database.next();
+        }
+
+        User[] userArray = new User[x];
+
+        database.toFirst();
+        for (int i = 0; i < userArray.length; i++){
+            userArray[i] = database.getContent();
+            database.next();
+        }
+
+
+        User temp;
+
+        for (int i = 1; i < userArray.length; i++) {
+            for (int j = 0; j < userArray.length - i; j++) {
+                if (userArray[j].getUsername().compareTo(userArray[j + 1].getUsername()) >= 0 ) {
+                    temp = userArray[j];
+                    userArray[j] = userArray[j + 1];
+                    userArray[j + 1] = temp;
+                }
+            }
+        }
+
+        database = new List<User>();
+        for (int i = 0; i < userArray.length; i++){
+            database.append(userArray[i]);
+        }
+    }
+
     /**
      * shows the menuview
      */
     public void enterMenu() {
-        view.getMenuView().refreshUserList();
         this.view.setState(View.State.Menu);
     }
 
