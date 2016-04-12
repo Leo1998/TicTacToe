@@ -1,9 +1,0 @@
-16.3 gameview, strings sortieren, menuview
-17.3 win erkennung verbessert
-18.3 resize, registrierung
-29.3 LogIn und Registrierung done,
-	Database abspeicherung und Verschlüsselung,
-	Background
-4.4 KI angefangen
-6.4 KI fast fertig
-8.4 KI Fertig, rematch, user liste

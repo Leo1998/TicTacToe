@@ -6,17 +6,37 @@ import javax.swing.*;
 
 public class View {
 
+    /**
+     * the state of the view
+     */
     public enum State {
         Menu, Game
     }
 
+    /**
+     * the Controller
+     */
     private Controller ctrl;
+    /**
+     * the current state
+     */
     private State state;
 
+    /**
+     * the frame
+     */
     private JFrame frame;
 
+    /**
+     * the menuview
+     */
     private MenuView menuView;
 
+    /**
+     * Controller
+     *
+     * @param ctrl
+     */
     public View(Controller ctrl){
         this.ctrl = ctrl;
 
@@ -30,18 +50,35 @@ public class View {
         frame.setVisible(true);
     }
 
+    /**
+     * forces a repaint
+     */
     public void repaint() {
         frame.getContentPane().repaint();
     }
 
+    /**
+     * Getter
+     *
+     * @return
+     */
     public MenuView getMenuView() {
         return menuView;
     }
 
+    /**
+     * Getter
+     *
+     * @return
+     */
     public State getState() {
         return state;
     }
 
+    /**
+     * sets the views state
+     * @param state
+     */
     public void setState(final State state) {
         this.state = state;
 

@@ -18,13 +18,28 @@ public class Controller {
         new Controller();
     }
 
+    /**
+     * the view
+     */
     private View view;
+    /**
+     * the game, may be null
+     */
     private Game game;
 
+    /**
+     * the user database
+     */
     private List<User> database;
 
+    /**
+     * whether the game is running
+     */
     private boolean running = true;
 
+    /**
+     * the Constructor of the class Controller
+     */
     public Controller() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -55,6 +70,9 @@ public class Controller {
         }
     }
 
+    /**
+     * reads the database from the filesystem
+     */
     public void readDatabase() {
         this.database = new List<User>();
 
@@ -91,6 +109,9 @@ public class Controller {
         }
     }
 
+    /**
+     * saves the database to the filesystem
+     */
     public void saveDatabase() {
         System.out.println("Saving Database to " + DATABASE_PATH);
         try {
@@ -114,12 +135,24 @@ public class Controller {
         }
     }
 
+    /**
+     * Adds a new user to the database
+     *
+     * @param username
+     * @param password
+     */
     public void addUser(String username, String password){
         User user = new User(username, password);
         database.append(user);
         view.getMenuView().refreshUserList();
     }
 
+    /**
+     * starts a new game with p1 vs p2
+     *
+     * @param p1
+     * @param p2
+     */
     public void startGame(Player p1, Player p2) {
         this.game = new Game(p1, p2, this);
 
@@ -130,15 +163,28 @@ public class Controller {
         this.view.setState(View.State.Game);
     }
 
+    /**
+     * shows the menuview
+     */
     public void enterMenu() {
         view.getMenuView().refreshUserList();
         this.view.setState(View.State.Menu);
     }
 
+    /**
+     * Getter
+     *
+     * @return
+     */
     public Game getGame() {
         return game;
     }
 
+    /**
+     * Getter
+     *
+     * @return
+     */
     public List<User> getDatabase(){
         return database;
     }

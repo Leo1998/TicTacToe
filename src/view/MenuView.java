@@ -64,7 +64,7 @@ public class MenuView {
                             }
 
                             if (p1 == null || p2 == null) {
-                                JOptionPane.showMessageDialog(null, "Fehler beim Einloggen! Bitte überprüfe deine Eingabe!");
+                                JOptionPane.showMessageDialog(null, "Fehler beim Einloggen! Bitte ï¿½berprï¿½fe deine Eingabe!");
                             } else {
                                 ctrl.startGame(p1, p2);
                             }
@@ -97,7 +97,7 @@ public class MenuView {
                             Player p2 = new Player("KI Player", false, ctrl);
 
                             if (p1 == null || p2 == null) {
-                                JOptionPane.showMessageDialog(null, "Fehler beim Einloggen! Bitte überprüfe deine Eingabe!");
+                                JOptionPane.showMessageDialog(null, "Fehler beim Einloggen! Bitte ï¿½berprï¿½fe deine Eingabe!");
                             } else {
                                 ctrl.startGame(p1, p2);
                             }
@@ -157,6 +157,9 @@ public class MenuView {
         });
     }
 
+    /**
+     * refreshes the user list
+     */
     public void refreshUserList() {
         DefaultListModel listModel = new DefaultListModel();
 

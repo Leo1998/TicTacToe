@@ -2,6 +2,12 @@ package model;
 
 public class Encryptor {
 
+    /**
+     * encrypts a string (not working)
+     *
+     * @param s
+     * @return
+     */
     public static String encrypt(String s) {
         String result = "";
         int l = s.length();
@@ -16,6 +22,12 @@ public class Encryptor {
         return s;
     }
 
+    /**
+     * decrypts a string (not working)
+     *
+     * @param s
+     * @return
+     */
     public static String decrypt(String s) {
         String result = "";
         int l = s.length();

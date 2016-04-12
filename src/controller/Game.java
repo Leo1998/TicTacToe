@@ -6,12 +6,31 @@ import javax.swing.*;
 
 public class Game {
 
+    /**
+     * the players p1 and p2
+     */
     private Player p1, p2;
+    /**
+     * the TicTacToe field
+     */
     private Field field;
+    /**
+     * the currentPlayer
+     */
     private Player currentPlayer;
 
+    /**
+     * the controller
+     */
     private Controller ctrl;
 
+    /**
+     * the Constructor
+     *
+     * @param p1
+     * @param p2
+     * @param ctrl
+     */
     public Game(Player p1, Player p2, Controller ctrl) {
         this.ctrl = ctrl;
         this.p1 = p1;
@@ -21,6 +40,12 @@ public class Game {
         this.currentPlayer = Math.random() > 0.5 ? p1 : p2;
     }
 
+    /**
+     * this fires the next move of the currentPlayer
+     *
+     * @param xMove -1 if KIPlayer
+     * @param yMove -1 if KIPlayer
+     */
     public void nextMove(int xMove, int yMove) {
         if ((xMove == -1 && yMove == -1) || !field.isOccupied(xMove, yMove)) {
             currentPlayer.move(field, xMove, yMove);
@@ -83,6 +108,11 @@ public class Game {
         }
     }
 
+    /**
+     * this calculates the KITree for the current game state
+     *
+     * @return
+     */
     public KITree calcKITree() {
         Player otherPlayer = currentPlayer == p1 ? p2 : p1;
 
@@ -92,18 +122,38 @@ public class Game {
         return kiTree;
     }
 
+    /**
+     * Getter
+     *
+     * @return
+     */
     public Player getP1() {
         return p1;
     }
 
+    /**
+     * Getter
+     *
+     * @return
+     */
     public Player getP2() {
         return p2;
     }
 
+    /**
+     * Getter
+     *
+     * @return
+     */
     public Field getField() {
         return field;
     }
 
+    /**
+     * Getter
+     *
+     * @return
+     */
     public Player getCurrentPlayer() {
         return currentPlayer;
     }

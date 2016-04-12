@@ -17,12 +17,32 @@ import java.awt.image.BufferedImage;
 
 public class GameView extends JPanel implements MouseListener, ComponentListener {
 
+    /**
+     * the game
+     */
     private Game game;
+    /**
+     * the fieldX
+     */
     private int fieldX;
+    /**
+     * the fieldY
+     */
     private int fieldY;
+    /**
+     * the fieldW
+     */
     private int fieldW;
+    /**
+     * the fieldH
+     */
     private int fieldH;
 
+    /**
+     * Constructor
+     *
+     * @param game
+     */
     public GameView(Game game) {
         this.game = game;
 
@@ -34,6 +54,11 @@ public class GameView extends JPanel implements MouseListener, ComponentListener
         this.onResize(this.getWidth(), this.getHeight());
     }
 
+    /**
+     * onResize (recalculates field size)
+     * @param w
+     * @param h
+     */
     private void onResize(int w, int h) {
         int r = Math.min(w, h);
         r -= r / 10;
@@ -61,6 +86,16 @@ public class GameView extends JPanel implements MouseListener, ComponentListener
         }
     }
 
+    /**
+     * draws the field at the given coordinates+
+     *
+     * @param g2d
+     * @param field
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
     private void drawField(Graphics2D g2d, Field field, int x, int y, int w, int h) {
         g2d.setColor(Color.white);
 
@@ -96,7 +131,6 @@ public class GameView extends JPanel implements MouseListener, ComponentListener
     }
 
     // mouse listener
-
     @Override
     public void mouseClicked(MouseEvent e) {
     }
