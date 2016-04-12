@@ -56,6 +56,7 @@ public class Game {
                     this.currentPlayer = Math.random() > 0.5 ? p1 : p2;
                 }else {
                     ctrl.enterMenu();
+                    ctrl.refreshUserList();
                 }
             } else if (field.isFull()) {
                 JOptionPane.showMessageDialog(null, "It's a draw!");

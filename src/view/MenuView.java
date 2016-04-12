@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class MenuView {
 
@@ -25,9 +27,24 @@ public class MenuView {
     private JPasswordField logPass2;
     private JCheckBox multiplayerCheckBox;
     private JList userList;
+    private JButton binaereSuche;
 
     public MenuView(final Controller ctrl) {
         this.ctrl = ctrl;
+
+        binaereSuche.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String zahl = JOptionPane.showInputDialog(null, "Welche Zahl soll gesucht werden?");
+                int echteZahl = Integer.parseInt(zahl);
+                int index = ctrl.binaereSuche(echteZahl);
+                if (index != -1) {
+                    JOptionPane.showMessageDialog(null, "Die gesuchte Zahl ist an der " + index + " Stelle im Array!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Die gesuchte Zahl ist nicht im Array");
+                }
+            }
+        });
 
         logButton.addActionListener(new ActionListener() {
             @Override

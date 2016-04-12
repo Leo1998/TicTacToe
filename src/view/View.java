@@ -3,6 +3,8 @@ package view;
 import controller.Controller;
 
 import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class View {
 
@@ -17,7 +19,7 @@ public class View {
 
     private MenuView menuView;
 
-    public View(Controller ctrl){
+    public View(final Controller ctrl){
         this.ctrl = ctrl;
 
         this.menuView = new MenuView(ctrl);
@@ -26,6 +28,26 @@ public class View {
         frame.setSize(640, 640);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        frame.setFocusable(true);
+        frame.requestFocus();
+
+        this.frame.addKeyListener(new KeyListener() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
 
         frame.setVisible(true);
     }
@@ -62,4 +84,6 @@ public class View {
             }
         });
     }
+
+
 }

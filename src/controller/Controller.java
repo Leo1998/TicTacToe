@@ -37,7 +37,7 @@ public class Controller {
         view.setState(View.State.Menu);
 
         readDatabase();
-        view.getMenuView().refreshUserList();
+        refreshUserList();
 
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
@@ -117,7 +117,7 @@ public class Controller {
     public void addUser(String username, String password){
         User user = new User(username, password);
         database.append(user);
-        view.getMenuView().refreshUserList();
+        refreshUserList();
     }
 
     public void startGame(Player p1, Player p2) {
@@ -130,6 +130,66 @@ public class Controller {
         this.view.setState(View.State.Game);
     }
 
+    public int binaereSuche(int z){
+        int[] zuSuchen = new int[10];
+        for (int i = 0; i < zuSuchen.length; i++){
+            zuSuchen[i] = i*3+1;
+        }
+
+        return sucheZumBinaer(z, 0, zuSuchen.length-1, zuSuchen);
+    }
+
+    public int sucheZumBinaer(int z, int low, int high, int[] a){
+        if (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (a[mid] == z) {
+                return mid;
+            } else if (z > a[mid]) {
+                return sucheZumBinaer(z, mid + 1, high, a);
+            } else if (z < a[mid]) {
+                return sucheZumBinaer(z, low, mid - 1, a);
+            }
+        }
+        return -1;
+    }
+
+	public void bubbleSort(){
+
+        int x = 0;
+
+        database.toFirst();
+        while (database.hasAccess()){
+            x++;
+            database.next();
+        }
+
+        User[] userArray = new User[x];
+
+        database.toFirst();
+        for (int i = 0; i < userArray.length; i++){
+            userArray[i] = database.getContent();
+            database.next();
+        }
+
+
+        User temp;
+
+        for (int i = 1; i < userArray.length; i++) {
+            for (int j = 0; j < userArray.length - i; j++) {
+                if (userArray[j].getUsername().compareTo(userArray[j + 1].getUsername()) >= 0 ) {
+                    temp = userArray[j];
+                    userArray[j] = userArray[j + 1];
+                    userArray[j + 1] = temp;
+                }
+            }
+        }
+
+        database = new List<User>();
+        for (int i = 0; i < userArray.length; i++){
+            database.append(userArray[i]);
+        }
+    }
+	
     public void enterMenu() {
         this.view.setState(View.State.Menu);
     }
@@ -140,5 +200,9 @@ public class Controller {
 
     public List<User> getDatabase(){
         return database;
+    }
+
+    public void refreshUserList(){
+        view.getMenuView().refreshUserList();
     }
 }
