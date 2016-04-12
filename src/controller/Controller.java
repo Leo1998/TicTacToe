@@ -191,6 +191,7 @@ public class Controller {
     }
 	
     public void enterMenu() {
+        view.getMenuView().refreshUserList();
         this.view.setState(View.State.Menu);
     }
 
