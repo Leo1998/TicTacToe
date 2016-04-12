@@ -52,6 +52,7 @@ public class Controller {
         view.setState(View.State.Menu);
 
         readDatabase();
+        refreshUserList();
 
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
@@ -147,6 +148,7 @@ public class Controller {
         User user = new User(username, password);
         database.append(user);
         bubbleSort();
+        refreshUserList();
     }
 
     /**
@@ -166,7 +168,6 @@ public class Controller {
     }
 
     public void bubbleSort(){
-
         int x = 0;
 
         database.toFirst();
@@ -202,11 +203,35 @@ public class Controller {
         }
     }
 
+    public int binarySearch(int z){
+        int[] a = new int[10];
+        for (int i = 0; i < a.length; i++){
+           a[i] = i*3+1;
+        }
+
+        return search(z, 0, a.length-1, a);
+    }
+
+    public int search(int z, int low, int high, int[] a){
+    if (low <= high) {
+         int mid = low + (high - low) / 2;
+         if (a[mid] == z) {
+              return mid;
+          } else if (z > a[mid]) {
+              return search(z, mid + 1, high, a);
+          } else if (z < a[mid]) {
+              return search(z, low, mid - 1, a);
+         }
+    }
+    return -1;
+    }
+
     /**
      * shows the menuview
      */
     public void enterMenu() {
         this.view.setState(View.State.Menu);
+        refreshUserList();
     }
 
     /**
@@ -226,4 +251,9 @@ public class Controller {
     public List<User> getDatabase(){
         return database;
     }
+
+    public void refreshUserList() {
+        view.getMenuView().refreshUserList();
+    }
+
 }

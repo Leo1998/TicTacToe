@@ -37,7 +37,7 @@ public class MenuView {
             public void actionPerformed(ActionEvent e) {
                 String s = JOptionPane.showInputDialog(null, "Welche Zahl soll gesucht werden?");
                 int num = Integer.parseInt(s);
-               // int index = ctrl.binarySearch(num);
+                int index = ctrl.binarySearch(num);
                 if (index != -1) {
                     JOptionPane.showMessageDialog(null, "Die gesuchte Zahl ist an der " + index + " Stelle im Array!");
                 } else {
@@ -276,6 +276,9 @@ public class MenuView {
         multiplayerCheckBox.setSelected(true);
         multiplayerCheckBox.setText("Multiplayer");
         panel.add(multiplayerCheckBox, new com.intellij.uiDesigner.core.GridConstraints(7, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        binaereSuche = new JButton();
+        binaereSuche.setText("BinäreSuche FTW");
+        panel.add(binaereSuche, new com.intellij.uiDesigner.core.GridConstraints(7, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
